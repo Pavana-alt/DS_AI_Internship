@@ -1,0 +1,11 @@
+order_id,customer_name,location,product,price,date
+1001,Aarav, New York,Keyboard,1200,01-02-2025
+1002,Meera,new york ,Mouse,500,02-02-2025
+1003,John,NEW YORK ,Monitor,15000,03-02-2025
+1004,Riya,New York ,Laptop,55000,04-02-2025
+1005,Karan,   new york,Headphones,2000,05-02-2025
+1006,Ananya,Chicago,Webcam,2500,06-02-2025
+1007,Rahul, CHICAGO ,Mouse,500,07-02-2025
+1008,Sneha,chicago ,Monitor,15000,08-02-2025
+1009,Arjun,Los Angeles,Laptop,55000,09-02-2025
+1010,Priya, LOS ANGELES ,Keyboard,1200,10-02-2025

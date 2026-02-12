@@ -1,0 +1,10 @@
+﻿order_id,customer_name,product_name,quantity,price,date
+1001,Aisha Khan,Chocolate Cake,1,$300,06-10-2020
+1002,Rahul Sharma,Vanilla Cake,2,$240,10-12-2025
+NaN,Priya Patel,Red Velvet Cake,1,$190,09-10-2023
+1004,Aisha Khan,Blueberry Pastry,3,$230,05-02-2022
+1005,Arjun Mehta,Black Forest Cake,1,$190,02-02-2021
+1005,Arjun Mehta,Black Forest Cake,1,$300,02-10-2020
+NaN,Neha Singh,Strawberry Cake,2,$200,03-08-2021
+1008,Karan Verma,Butterscotch Cake,1,$450,08-09-2020
+1009,Priya Patel,Chocolate Truffle Cake,1,$343,04-03-2020
