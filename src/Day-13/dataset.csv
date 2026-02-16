@@ -1,0 +1,10 @@
+﻿Customer_ID,Age,Gender,City,Salary,Spending_Score,Purchase_Amount
+C001,22,Female,Delhi,30000,60,1200
+C002,35,Male,Mumbai,55000,45,2500
+C003,28,Female,Bangalore,40000,75,1800
+C004,45,Male,Chennai,70000,30,3200
+C005,32,Female,Hyderabad,48000,85,2100
+C006,29,Male,Kolkata,42000,55,1500
+C007,50,Male,Delhi,90000,20,5000
+C008,27,Female,Mumbai,38000,90,2200
+C009,41,Male,Bangalore,62000,35,2800
