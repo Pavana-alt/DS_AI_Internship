@@ -90,11 +90,18 @@ print("\nFeature Engineering Completed Successfully!")
 
 #Task-1
 import pandas as pd
-df = pd.DataFrame({
-    "Transmission": ["Automatic", "Manual", "Manual", "Automatic", "Manual"],
-    "Color": ["Red", "Blue", "Green", "Red", "Blue"]
-})
-df["Transmission"] = df["Transmission"].map({"Manual": 0, "Automatic": 1})
+data = {
+    "Transmission": ["Automatic", "Manual", "Automatic", "Manual"],
+    "Color": ["Red", "Blue", "Green", "Red"]
+}
+
+df = pd.DataFrame(data)
+print(df)
+from sklearn.preprocessing import LabelEncoder
+le = LabelEncoder()
+df["Transmission"] = le.fit_transform(df["Transmission"])
+print(df)
+
 df = pd.get_dummies(df, columns=["Color"], drop_first=True)
 print(df)
 
@@ -103,36 +110,48 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import StandardScaler, MinMaxScaler
 
-df = pd.DataFrame({
-    "Age": [22, 25, 28, 30, 35, 40, 45, 50],
-    "Salary": [25000, 30000, 45000, 50000, 65000, 80000, 100000, 120000]
-})
+data = {
+    "Age": [22, 25, 30, 35, 40, 28, 32, 45, 50, 29],
+    "Salary": [20000, 25000, 30000, 40000, 50000, 27000, 32000, 60000, 80000, 29000]
+}
+
+df = pd.DataFrame(data)
+
+print("Original Data:\n")
+print(df)
 
 standard_scaler = StandardScaler()
+df_standardized = df.copy()
+df_standardized[["Age", "Salary"]] = standard_scaler.fit_transform(df[["Age", "Salary"]])
+
+print("\nStandardized Data:\n")
+print(df_standardized)
+
 minmax_scaler = MinMaxScaler()
+df_normalized = df.copy()
+df_normalized[["Age", "Salary"]] = minmax_scaler.fit_transform(df[["Age", "Salary"]])
 
-df_standardized = pd.DataFrame(
-    standard_scaler.fit_transform(df),
-    columns=df.columns
-)
+print("\nNormalized Data:\n")
+print(df_normalized)
 
-df_normalized = pd.DataFrame(
-    minmax_scaler.fit_transform(df),
-    columns=df.columns
-)
+plt.figure(figsize=(15,5))
 
-plt.figure(figsize=(10, 4))
-
-plt.subplot(1, 2, 1)
-plt.hist(df["Salary"], bins=6)
-plt.title("Salary Before Scaling")
+plt.subplot(1, 3, 1)
+plt.hist(df["Salary"], bins=5)
+plt.title("Original Salary")
 plt.xlabel("Salary")
 plt.ylabel("Frequency")
 
-plt.subplot(1, 2, 2)
-plt.hist(df_standardized["Salary"], bins=6)
-plt.title("Salary After StandardScaler")
-plt.xlabel("Scaled Salary")
+plt.subplot(1, 3, 2)
+plt.hist(df_standardized["Salary"], bins=5)
+plt.title("Standardized Salary")
+plt.xlabel("Standardized")
+plt.ylabel("Frequency")
+
+plt.subplot(1, 3, 3)
+plt.hist(df_normalized["Salary"], bins=5)
+plt.title("Normalized Salary")
+plt.xlabel("Normalized")
 plt.ylabel("Frequency")
 
 plt.tight_layout()
@@ -140,34 +159,27 @@ plt.show()
 
 #Task-3
 import numpy as np
-from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import PolynomialFeatures
 from sklearn.linear_model import LinearRegression
+from sklearn.preprocessing import PolynomialFeatures
 from sklearn.metrics import r2_score
 
-np.random.seed(42)
-
-X = np.arange(1, 51).reshape(-1, 1)
-y = 3*(X[:, 0]**2) + 5*X[:, 0] + 10 + np.random.normal(0, 200, size=50)
-
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+X = np.array([1, 3, 5, 7, 9, 11]).reshape(-1, 1)
+y = np.array([2, 5, 10, 18, 26, 37])
 
 linear_model = LinearRegression()
-linear_model.fit(X_train, y_train)
-y_pred_linear = linear_model.predict(X_test)
-r2_linear = r2_score(y_test, y_pred_linear)
+linear_model.fit(X, y)
+y_pred_linear = linear_model.predict(X)
+r2_linear = r2_score(y, y_pred_linear)
 
-poly = PolynomialFeatures(degree=2, include_bias=False)
+poly = PolynomialFeatures(degree=2)
 X_poly = poly.fit_transform(X)
 
-X_train_p, X_test_p, y_train_p, y_test_p = train_test_split(X_poly, y, test_size=0.2, random_state=42)
-
 poly_model = LinearRegression()
-poly_model.fit(X_train_p, y_train_p)
-y_pred_poly = poly_model.predict(X_test_p)
-r2_poly = r2_score(y_test_p, y_pred_poly)
+poly_model.fit(X_poly, y)
+y_pred_poly = poly_model.predict(X_poly)
+r2_poly = r2_score(y, y_pred_poly)
 
-print("R² Score (Original Features):", r2_linear)
-print("R² Score (Polynomial Features degree=2):", r2_poly)
+print("R² Score (Linear):", r2_linear)
+print("R² Score (Polynomial):", r2_poly)
 
 
